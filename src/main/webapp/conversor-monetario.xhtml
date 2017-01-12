@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Conversor de Moedas</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h1>Conversor Monetario</h1>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Valor: " for="valor"></h:outputLabel>
+			<h:inputText value="#{conversorMonetarioBean.valor}" id="valor" />
+
+			<h:outputLabel value="De: " for="de" />
+			<h:selectOneMenu value="#{conversorMonetarioBean.de}" id="de">
+				<f:selectItems
+					value="#{conversorMonetarioBean.valorMoedas.keySet()}" var="moeda"
+					itemValue="#{moeda}" itemLabel="#{moeda}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Para: " for="para" />
+			<h:panelGroup>
+				<h:selectOneMenu value="#{conversorMonetarioBean.para}" id="para">
+					<f:selectItems
+						value="#{conversorMonetarioBean.valorMoedas.keySet()}" var="moeda"
+						itemValue="#{moeda}" itemLabel="#{moeda}" />
+				</h:selectOneMenu>
+				<h:commandButton value="Submeter"
+					action="#{conversorMonetarioBean.converte}" />
+			</h:panelGroup>
+		</h:panelGrid>
+
+	</h:form>
+
+	<h:outputFormat value="{0} {1} equivale a {3} custa {2}s"
+		rendered="#{conversorMonetarioBean.resultado != null}">
+		<f:param value="#{conversorMonetarioBean.valor}" />
+		<f:param value="#{conversorMonetarioBean.de}" />
+		<f:param value="#{conversorMonetarioBean.para}" />
+		<f:param value="#{conversorMonetarioBean.resultado}" />
+	</h:outputFormat>
+
+</h:body>
+
+</html>
