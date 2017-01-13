@@ -3,11 +3,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
 	<title>Cursos</title>
 </h:head>
+
+<h:outputStylesheet name="k19.css" library="css" />
 
 <h:body>
 	<h:form>
@@ -24,7 +27,7 @@
 
 	<h:dataTable value="#{cursoBean.cursos}" var="x"
 		rendered="#{not empty cursoBean.cursos}">
-		<f:facet name="header">Lista de Cursos</f:facet>
+		<f:facet name="header">Lista de Cursos (DT)</f:facet>
 
 		<h:column>
 			<f:facet name="header">Sigla</f:facet>
@@ -37,6 +40,13 @@
 		</h:column>
 	</h:dataTable>
 
+	<h1>Alguns Cursos..</h1>
+	<ul>
+		<ui:repeat var="curso" value="#{cursoBean.cursos}">
+			<li><h:outputText value="Nome do Curso : #{curso.nome} - Sigla: #{curso.sigla}" />
+		</li>
+		</ui:repeat>
+	</ul>
 </h:body>
 </html>
 
